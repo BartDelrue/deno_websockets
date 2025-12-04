@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>client</title>
+      <script type="module" src="./src/main.ts"></script>
+      <link rel="stylesheet" href="./src/style.css">
+  </head>
+  <body>
+        <form id="join" class="box container-ultra-narrow mb-8">
+            <div class="formField">
+                <label for="username">Username</label>
+                <input type="text" id="username">
+            </div>
+            <div class="formField">
+                <label for="avatar">Avatar</label>
+                <select  id="avatar" class="text-xxl w-content">
+                    <option>🧑‍🚀</option>
+                    <option>🕺</option>
+                    <option>💃</option>
+                    <option>🧙‍♂️</option>
+                    <option>🧜‍♀️</option>
+                    <option>🧛‍♂️</option>
+                    <option>🤹</option>
+                    <option>🧞‍♂️</option>
+                    <option>🤴</option>
+                    <option>👸</option>
+                    <option>🧑‍🌾</option>
+                    <option>🧑‍🎤</option>
+                </select>
+            </div>
+            <div class="formActions">
+                <button type="submit">Join</button>
+            </div>
+        </form>
+        <div id="room" hidden="hidden">
+
+            <form class="chatbox">
+                <input type="text" aria-label="speak" name="message">
+                <input type="submit" value="send">
+            </form>
+        </div>
+  </body>
+</html>

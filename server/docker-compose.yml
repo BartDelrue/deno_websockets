@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  deno_server:
+    build: .
+    ports:
+      - "8000:8000"
+    command: ["deno", "task", "dev"]
+    volumes:
+      - .:/app
+
+    environment:
+      DENO_ENV: development
+      DENO_FUTURE_WATCH_POLLING: 1
+    restart: always
