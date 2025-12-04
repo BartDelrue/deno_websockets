@@ -1,4 +1,5 @@
 import { Room } from "./room.ts";
+import type {Payload} from "@shared/types.ts";
 
 const room = new Room();
 
@@ -14,7 +15,7 @@ Deno.serve((req) => {
   });
 
   socket.addEventListener("message", (event) => {
-    let message;
+    let message: Payload;
     try {
       message = JSON.parse(event.data);
     } catch {
