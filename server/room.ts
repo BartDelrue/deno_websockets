@@ -7,14 +7,6 @@ export class Room {
     Member
   >();
 
-  private handlers = new Map<
-    string,
-    {
-      close: EventListenerOrEventListenerObject;
-      error: EventListenerOrEventListenerObject;
-    }
-  >();
-
   join(socket, { username, avatar }: Pick<MemberInfo, "username" | "avatar">) {
     const id = crypto.randomUUID();
     const me = { id, username, avatar };

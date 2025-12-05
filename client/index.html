@@ -12,11 +12,11 @@
         <form id="join" class="box container-ultra-narrow mb-8">
             <div class="formField">
                 <label for="username">Username</label>
-                <input type="text" id="username">
+                <input name="username" type="text" id="username">
             </div>
             <div class="formField">
                 <label for="avatar">Avatar</label>
-                <select  id="avatar" class="text-xxl w-content">
+                <select name="avatar" id="avatar" class="text-xxl w-content">
                     <option>🧑‍🚀</option>
                     <option>🕺</option>
                     <option>💃</option>
@@ -37,7 +37,7 @@
         </form>
         <div id="room" hidden="hidden">
 
-            <form class="chatbox">
+            <form class="chatbox" id="chatbox">
                 <input type="text" aria-label="speak" name="message">
                 <input type="submit" value="send">
             </form>
