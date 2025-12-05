@@ -11,6 +11,12 @@ export interface MemberInfo {
 }
 
 /* Payload variants */
+
+export type InitPayload = {
+    type: "init";
+    data: Pick<MemberInfo, "username" | "avatar">;
+};
+
 export type CreatedPayload = {
   type: "created";
   data: {
@@ -54,6 +60,7 @@ export type MessagePayload = {
 };
 
 export type Payload =
+  | InitPayload
   | CreatedPayload
   | JoinedPayload
   | MovePayload
