@@ -54,7 +54,6 @@ export type MessagePayload = {
   type: "message";
   data: {
     id: string;
-    username: string;
     message: string;
   };
 };

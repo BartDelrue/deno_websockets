@@ -1,5 +1,5 @@
-import type { MemberInfo, Payload } from "@shared/types.ts";
-import type { Unsubscribe} from "./transport.ts";
+import type {MemberInfo, Payload} from "@shared/types.ts";
+import type {Unsubscribe} from "./transport.ts";
 
 type DomainEvents = {
     memberAdded: { id: string; info: Pick<MemberInfo, "username" | "avatar"> };
@@ -61,7 +61,7 @@ export class RoomDomain {
                 });
                 break;
             case "left":
-                this.events.emit("memberRemoved", { id: payload.data.id });
+                this.events.emit("memberRemoved", {id: payload.data.id});
                 break;
             case "move":
                 this.events.emit("memberMoved", {
@@ -82,14 +82,14 @@ export class RoomDomain {
     }
 
     init(username: string, avatar: string) {
-        this.emitOutbound({ type: "init", data: { username, avatar } });
+        this.emitOutbound({type: "init", data: {username, avatar}});
     }
 
     move(id: string, x: string, y: string) {
-        this.emitOutbound({ type: "move", data: { id, x, y } });
+        this.emitOutbound({type: "move", data: {id, x, y}});
     }
 
     speak(id: string, message: string) {
-        this.emitOutbound({ type: "message", data: { id, message } });
+        this.emitOutbound({type: "message", data: {id, message}});
     }
 }
