@@ -1,4 +1,4 @@
-import type { MemberInfo, Payload } from "@shared/types.ts";
+import {MemberInfo, MovePayload, Payload} from "@shared/types.ts";
 import type { Member } from "./types.ts";
 
 export class Room {
@@ -7,7 +7,7 @@ export class Room {
     Member
   >();
 
-  join(socket, { username, avatar }: Pick<MemberInfo, "username" | "avatar">) {
+  join(socket: WebSocket, { username, avatar }: Pick<MemberInfo, "username" | "avatar">) {
     const id = crypto.randomUUID();
     const me = { id, username, avatar };
     const others = Array.from(this.members.values()).map((
@@ -37,7 +37,7 @@ export class Room {
     }, { exclude: [id] });
   }
 
-  speak({ id, message }) {
+  speak({ id, message }: { id: string, message: string }) {
     const user = this.members.get(id);
     if (!user) return;
 
@@ -51,7 +51,7 @@ export class Room {
     });
   }
 
-  move(data) {
+  move(data: MovePayload["data"]) {
     const user = this.members.get(data.id);
     if (!user) return;
 
