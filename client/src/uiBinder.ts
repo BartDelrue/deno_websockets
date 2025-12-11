@@ -8,7 +8,7 @@ type Options = {
 
 export class UIBinder {
 
-    private userOffset: {x: string, y: string} = { x: "", y: ""}
+    private userOffset: {x: number, y: number} = { x: 0, y: 0}
     private userId?: string
 
     constructor(
@@ -28,15 +28,17 @@ export class UIBinder {
         const formData = new FormData(this.options.joinForm);
 
         this.domain.init(
-            formData.get("username") ?? "",
-            formData.get("avatar") ?? "",
+            formData.get("username") as string ?? "",
+            formData.get("avatar") as string ?? "",
         );
     }
     private onChat(e: SubmitEvent) {
         e.preventDefault();
+        if (!this.userId) return;
+
         const formData = new FormData(this.options.chatForm);
 
-        this.domain.speak(this.userId, formData.get("message"));
+        this.domain.speak(this.userId, formData.get("message") as string);
         this.options.chatForm.reset();
     }
 

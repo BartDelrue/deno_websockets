@@ -6,32 +6,32 @@ export class Presenter {
         string,
         { avatar: HTMLElement; speechBubble: HTMLSpanElement }
     >();
-    private userId?: string;
+
     private timeOutMap: Map<string, number> = new Map();
     private meCreatedCallback?: (meAvatar: HTMLElement) => void
 
     constructor(private domain: RoomDomain, private options: {
         roomEl: HTMLElement;
         joinForm: HTMLFormElement;
-        createMemberEl: (info: MemberInfo, isMe?: boolean) => {avatar: HTMLElement, speechBubble: HTMLElement}
+        createMemberEl: (info: Pick<MemberInfo, 'avatar' | 'username'>, isMe?: boolean) => {avatar: HTMLElement, speechBubble: HTMLElement}
     }) {
-        domain.events.on(
+        this.domain.events.on(
             "initialized",
             ({me, others}) => this.onInitialized(me, others),
         );
-        domain.events.on(
+        this.domain.events.on(
             "memberAdded",
             ({ id, info }) => this.onMemberAdded(id, info),
         );
-        domain.events.on(
+        this.domain.events.on(
             "memberRemoved",
             ({ id }) => this.onMemberRemoved(id),
         );
-        domain.events.on(
+        this.domain.events.on(
             "memberMoved",
             ({ id, x, y }) => this.onMemberMoved(id, x, y),
         );
-        domain.events.on(
+        this.domain.events.on(
             "message",
             ({ id, message }) => this.onMessage(id, message),
         );
@@ -49,7 +49,6 @@ export class Presenter {
 
         this.options.roomEl.appendChild(meEls.avatar);
         this.memberEls.set(me.id, meEls);
-        this.userId = me.id;
 
         others.forEach((m) => {
             const els = this.options.createMemberEl(m, false);
@@ -60,9 +59,10 @@ export class Presenter {
         this.options.roomEl.hidden = false;
         this.options.joinForm.hidden = true;
 
-        this.meCreatedCallback(meEls.avatar)
+        if (this.meCreatedCallback)
+            this.meCreatedCallback(meEls.avatar)
     }
-    private onMemberAdded(id: string, info: MemberInfo) {
+    private onMemberAdded(id: string, info: Pick<MemberInfo, 'avatar' | 'username'>) {
         const els = this.options.createMemberEl(info, false);
         this.options.roomEl.appendChild(els.avatar);
         this.memberEls.set(id, els);
