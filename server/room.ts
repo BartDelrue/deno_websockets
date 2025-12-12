@@ -44,7 +44,6 @@ export class Room {
     this.broadcast({
       type: "message",
       data: {
-        username: user.username,
         id: user.id,
         message,
       },
